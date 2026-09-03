@@ -95,6 +95,23 @@ test("missing versions are rejected before delegated content can change", () => 
   assert.equal(state.blocks.find((block) => block.id === "sprint-plan").content, before);
 });
 
+test("unknown authority states fail closed instead of behaving as delegated", () => {
+  const initial = createInitialState();
+  const target = initial.blocks.find((block) => block.id === "sprint-plan");
+  const before = target.content;
+  target.authority = "unknown";
+
+  const { state, results } = applyAgentPatches(
+    initial,
+    [{ blockId: "sprint-plan", content: "This must not apply", expectedVersion: 1 }],
+    fixedNow,
+  );
+
+  assert.equal(results[0].status, "invalid");
+  assert.match(results[0].message, /Unknown authority/);
+  assert.equal(state.blocks.find((block) => block.id === "sprint-plan").content, before);
+});
+
 test("accepting a proposal applies it while rejection preserves the block", () => {
   const initial = createInitialState();
   const queued = applyAgentPatches(

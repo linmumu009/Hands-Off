@@ -293,6 +293,25 @@ export function applyAgentPatches(state, patches, now = () => new Date()) {
       continue;
     }
 
+    if (block.authority !== AUTHORITY.DELEGATED) {
+      results.push({
+        blockId: block.id,
+        status: "invalid",
+        message: "Unknown authority state. Content was not changed.",
+      });
+      addActivity(
+        next,
+        {
+          kind: "blocked",
+          title: `${block.title} authority was invalid`,
+          detail: "The policy engine failed closed without changing content.",
+          blockId: block.id,
+        },
+        now,
+      );
+      continue;
+    }
+
     block.content = patch.content;
     block.version += 1;
     block.updatedBy = "agent";
