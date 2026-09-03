@@ -291,10 +291,6 @@ function updateState(nextState) {
 }
 
 function submitPatch(input = {}) {
-  if (typeof input.objective === "string" && input.objective.trim()) {
-    state = { ...state, objective: input.objective.trim().slice(0, 240) };
-  }
-
   const { state: nextState, results } = applyAgentPatches(state, input.operations);
   recentOutcomes = new Map(
     results
@@ -326,7 +322,6 @@ function runDemo() {
   state = createInitialState();
   const versions = Object.fromEntries(state.blocks.map((block) => [block.id, block.version]));
   submitPatch({
-    objective: "Ship a bolder launch in two weeks without crossing the human's boundaries.",
     operations: [
       {
         blockId: "launch-date",

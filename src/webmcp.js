@@ -21,11 +21,6 @@ const SUBMIT_PATCH_TOOL = {
   inputSchema: {
     type: "object",
     properties: {
-      objective: {
-        type: "string",
-        description: "A short description of the requested outcome.",
-        maxLength: 240,
-      },
       operations: {
         type: "array",
         minItems: 1,

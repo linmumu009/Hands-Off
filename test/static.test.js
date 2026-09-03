@@ -42,3 +42,13 @@ test("WebMCP is registered imperatively on the top-level document", async () => 
   assert.match(source, /document\.modelContext\?\.registerTool/);
   assert.doesNotMatch(source, /iframe/i);
 });
+
+test("agent patches cannot change the human-owned workspace objective", async () => {
+  const [app, webmcp] = await Promise.all([
+    readFile(files.app, "utf8"),
+    readFile(files.webmcp, "utf8"),
+  ]);
+
+  assert.doesNotMatch(app, /input\.objective/);
+  assert.doesNotMatch(webmcp, /objective\s*:/);
+});
