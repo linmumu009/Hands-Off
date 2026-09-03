@@ -2,6 +2,8 @@
 
 > **Paint the boundary. Delegate the rest.**
 
+**Live demo:** [linmumu009.github.io/Hands-Off](https://linmumu009.github.io/Hands-Off/)
+
 Hands Off is a WebMCP-native authority canvas where every object declares how much authority an AI agent has. Instead of repeating constraints in prompts or approving every individual action, a human sets a persistent, visible mandate on the objects themselves.
 
 ## The interaction model

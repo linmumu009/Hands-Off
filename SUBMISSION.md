@@ -1,5 +1,10 @@
 # Hands Off — submission kit
 
+## Links
+
+- Live app: https://linmumu009.github.io/Hands-Off/
+- Source: https://github.com/linmumu009/Hands-Off
+
 ## One-line pitch
 
 Hands Off turns every interface object into an enforceable agent permission: human-only, review-first, or delegated.
