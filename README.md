@@ -28,6 +28,8 @@ The agent should call `read_workspace` first and then `submit_patch`. The launch
 
 In a regular browser, select **Run the 20-second demo** to execute the same deterministic authority path without an agent.
 
+For the real WebMCP check, use the ChatGPT desktop app's integrated browser with GPT-5.6 Sol or GPT-5.6 Terra. Confirm that the connection pill reports two site tools, run the prompt above, and inspect the browser's recent site-tool activity after the canvas changes.
+
 ## Site tools
 
 ### `read_workspace`
@@ -39,6 +41,8 @@ Returns the objective plus each block's stable ID, complete content, authority a
 Accepts up to 12 narrow block replacements. Every operation includes the `expectedVersion` observed during the read, preventing stale agent writes. The result explicitly reports `applied`, `needs_review`, `blocked`, `conflict` or `invalid`; a queued proposal is never represented as applied.
 
 Both tools are registered imperatively through `document.modelContext.registerTool` on the top-level page. The app has no model API, backend, account system or external runtime dependency.
+
+Hands Off demonstrates application-enforced authority for writes submitted through its WebMCP tool. It does not replace browser, account, identity or operating-system security; the integrated browser's normal safety review remains a separate layer.
 
 ## Run locally
 

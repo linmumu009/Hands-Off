@@ -31,7 +31,7 @@ Agent interfaces currently treat permission as a global setting or a stream of c
 
 Hands Off is a dependency-free static web application. Its two site tools are registered with the imperative WebMCP JavaScript API on the top-level page. A pure policy engine handles validation, optimistic concurrency, proposal lifecycle and immutable state transitions. Browser local storage keeps the canvas available across refreshes.
 
-No model API, backend or database is required: the visiting agent provides intelligence, while the application retains authority.
+No model API, backend or database is required: the visiting agent provides intelligence, while the application retains authority over the WebMCP write path.
 
 ## The 60-second demo
 
