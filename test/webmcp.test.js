@@ -24,6 +24,7 @@ test("registers exactly two WebMCP tools with narrow schemas", async () => {
   );
   assert.equal(registered[0].annotations.readOnlyHint, true);
   assert.equal(registered[1].annotations.readOnlyHint, false);
+  assert.equal(registered[1].annotations.destructiveHint, true);
   assert.equal(registered[1].inputSchema.additionalProperties, false);
   assert.equal("objective" in registered[1].inputSchema.properties, false);
   assert.equal(registered[1].inputSchema.properties.operations.maxItems, 12);

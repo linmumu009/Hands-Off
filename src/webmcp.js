@@ -59,7 +59,7 @@ const SUBMIT_PATCH_TOOL = {
   },
   annotations: {
     readOnlyHint: false,
-    destructiveHint: false,
+    destructiveHint: true,
     idempotentHint: false,
     openWorldHint: false,
   },
