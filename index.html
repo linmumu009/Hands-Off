@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hands Off is a WebMCP-native authority canvas for safe human-agent collaboration."
+    />
+    <meta name="theme-color" content="#f2efe8" />
+    <title>Hands Off — Paint the boundary. Delegate the rest.</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="Hands Off home">
+        <span class="mark" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+        <span>Hands Off</span>
+      </a>
+
+      <div class="topbar-actions">
+        <div class="connection-pill" id="connectionPill" aria-live="polite">
+          <span class="connection-dot"></span>
+          <span id="connectionLabel">Checking site tools…</span>
+        </div>
+        <button class="quiet-button" id="resetButton" type="button">Reset canvas</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="kicker"><span>WebMCP</span> / Authority canvas</p>
+          <h1 id="heroTitle">Don’t prompt<br />the boundary. <em>Paint it.</em></h1>
+          <p class="hero-description">
+            Every object says what an agent may do. You set the mandate once;
+            the interface enforces it every time.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-button" id="runDemoButton" type="button">
+              <span>Run the 20-second demo</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <button class="secondary-button" id="copyPromptButton" type="button">
+              Copy agent prompt
+            </button>
+          </div>
+        </div>
+
+        <div class="authority-orbit" aria-label="Three levels of agent authority">
+          <div class="orbit-line orbit-outer" aria-hidden="true"></div>
+          <div class="orbit-line orbit-inner" aria-hidden="true"></div>
+          <div class="orbit-core">
+            <span>YOU</span>
+            <strong>set the<br />mandate</strong>
+          </div>
+          <div class="orbit-chip orbit-lock">
+            <span class="chip-icon">—</span>
+            <span><b>Human only</b><small>Protected</small></span>
+          </div>
+          <div class="orbit-chip orbit-review">
+            <span class="chip-icon">◐</span>
+            <span><b>Review first</b><small>Proposed</small></span>
+          </div>
+          <div class="orbit-chip orbit-delegate">
+            <span class="chip-icon">↗</span>
+            <span><b>Delegated</b><small>Applied</small></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace-shell" aria-labelledby="workspaceTitle">
+        <div class="canvas-panel">
+          <header class="canvas-header">
+            <div>
+              <p class="section-label">Shared workspace</p>
+              <h2 id="workspaceTitle">Launch control</h2>
+            </div>
+            <div class="workspace-version">Workspace <span id="workspaceVersion">v1</span></div>
+          </header>
+
+          <div class="objective-bar">
+            <span class="objective-label">Current objective</span>
+            <p id="objectiveText"></p>
+          </div>
+
+          <div class="authority-summary" id="authoritySummary" aria-label="Authority summary"></div>
+          <div class="workspace-grid" id="workspaceGrid"></div>
+        </div>
+
+        <aside class="inspector">
+          <section class="inspector-card prompt-card">
+            <div class="inspector-heading">
+              <p class="section-label">Try with an agent</p>
+              <span class="step-badge">01</span>
+            </div>
+            <p class="prompt-text" id="agentPromptText"></p>
+            <button class="text-button" id="copyPromptInline" type="button">
+              Copy prompt <span aria-hidden="true">↗</span>
+            </button>
+          </section>
+
+          <section class="inspector-card review-card" id="reviewCard">
+            <div class="inspector-heading">
+              <p class="section-label">Human review</p>
+              <span class="review-count" id="reviewCount">0</span>
+            </div>
+            <div id="reviewQueue"></div>
+          </section>
+
+          <section class="inspector-card activity-card">
+            <div class="inspector-heading">
+              <p class="section-label">Authority log</p>
+              <span class="live-label"><i></i> Live</span>
+            </div>
+            <div class="activity-list" id="activityList"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p>One interface. Three levels of agency.</p>
+      <p>Built for the OpenAI WebMCP Challenge.</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
