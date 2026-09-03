@@ -96,11 +96,8 @@ function validatePatch(patch) {
   if (patch.content.length > MAX_CONTENT_LENGTH) {
     return `content must be ${MAX_CONTENT_LENGTH} characters or fewer.`;
   }
-  if (
-    patch.expectedVersion !== undefined &&
-    (!Number.isInteger(patch.expectedVersion) || patch.expectedVersion < 1)
-  ) {
-    return "expectedVersion must be a positive integer.";
+  if (!Number.isInteger(patch.expectedVersion) || patch.expectedVersion < 1) {
+    return "expectedVersion is required and must be a positive integer.";
   }
   return null;
 }
@@ -220,7 +217,7 @@ export function applyAgentPatches(state, patches, now = () => new Date()) {
       continue;
     }
 
-    if (patch.expectedVersion !== undefined && patch.expectedVersion !== block.version) {
+    if (patch.expectedVersion !== block.version) {
       results.push({
         blockId: block.id,
         status: "conflict",

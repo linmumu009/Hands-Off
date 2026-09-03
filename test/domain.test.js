@@ -19,7 +19,14 @@ test("locked patches are rejected without changing content", () => {
 
   const { state, results } = applyAgentPatches(
     initial,
-    [{ blockId: "launch-date", content: "September 12, 2026", reason: "Move faster" }],
+    [
+      {
+        blockId: "launch-date",
+        content: "September 12, 2026",
+        expectedVersion: 1,
+        reason: "Move faster",
+      },
+    ],
     fixedNow,
   );
 
@@ -34,7 +41,14 @@ test("review patches create proposals without changing content", () => {
 
   const { state, results } = applyAgentPatches(
     initial,
-    [{ blockId: "positioning", content: "Small teams. Unreasonably ambitious launches.", reason: "Bolder" }],
+    [
+      {
+        blockId: "positioning",
+        content: "Small teams. Unreasonably ambitious launches.",
+        expectedVersion: 1,
+        reason: "Bolder",
+      },
+    ],
     fixedNow,
   );
 
@@ -67,11 +81,25 @@ test("stale writes are rejected even for delegated blocks", () => {
   assert.equal(results[0].status, "conflict");
 });
 
+test("missing versions are rejected before delegated content can change", () => {
+  const initial = createInitialState();
+  const before = initial.blocks.find((block) => block.id === "sprint-plan").content;
+  const { state, results } = applyAgentPatches(
+    initial,
+    [{ blockId: "sprint-plan", content: "Replace it without a version" }],
+    fixedNow,
+  );
+
+  assert.equal(results[0].status, "invalid");
+  assert.match(results[0].message, /expectedVersion is required/);
+  assert.equal(state.blocks.find((block) => block.id === "sprint-plan").content, before);
+});
+
 test("accepting a proposal applies it while rejection preserves the block", () => {
   const initial = createInitialState();
   const queued = applyAgentPatches(
     initial,
-    [{ blockId: "positioning", content: "A sharper promise." }],
+    [{ blockId: "positioning", content: "A sharper promise.", expectedVersion: 1 }],
     fixedNow,
   ).state;
 
@@ -81,7 +109,7 @@ test("accepting a proposal applies it while rejection preserves the block", () =
 
   const queuedAgain = applyAgentPatches(
     accepted.state,
-    [{ blockId: "positioning", content: "Another promise." }],
+    [{ blockId: "positioning", content: "Another promise.", expectedVersion: 2 }],
     fixedNow,
   ).state;
   const rejected = resolveProposal(queuedAgain, queuedAgain.proposals[0].id, "reject", fixedNow);
