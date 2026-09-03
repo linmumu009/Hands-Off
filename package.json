@@ -1,0 +1,11 @@
+{
+  "name": "hands-off",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/domain.js && node --check src/webmcp.js && node --check src/app.js",
+    "serve": "python -m http.server 4173"
+  }
+}
